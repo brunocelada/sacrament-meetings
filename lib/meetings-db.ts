@@ -1,0 +1,109 @@
+import type { SacramentMeeting } from "./types";
+
+const meetings: SacramentMeeting[] = [
+  {
+    id: 1,
+    date: "2026-03-01",
+    meetingType: "testimony",
+    presiding: "Bishop Perez",
+    conducting: "Bishop Perez",
+    openingHymn: { number: 3, title: "Now Let Us Rejoice" },
+    openingPrayer: "Sister Gomez",
+    wardBusiness: [{ description: "none" }],
+    stakeBusiness: false,
+    sacramentHymn: { number: 175, title: "O God, the Eternal Father" },
+    speakers: [],
+    closingHymn: { number: 4, title: "Truth Eternal" },
+    closingPrayer: "Brother Diaz",
+    announcements: ["General Conference next month"],
+  },
+  {
+    id: 2,
+    date: "2026-03-08",
+    meetingType: "regular",
+    presiding: "Bishop Perez",
+    conducting: "Brother Perticarari",
+    openingHymn: { number: 2, title: "The Spirit of God" },
+    openingPrayer: "Sister Bellittieri",
+    wardBusiness: [{ description: "Sustaining of new Primary president" }],
+    stakeBusiness: false,
+    sacramentHymn: { number: 169, title: "In Remembrance of Thy Suffering" },
+    speakers: [
+      { name: "Sister Brown", topic: "Faith in Jesus Christ", type: "speaker" },
+      { name: "Youth Choir", topic: "", type: "musical-number" },
+    ],
+    closingHymn: { number: 31, title: "O God, Our Help in Ages Past" },
+    closingPrayer: "Brother Gonzalez",
+    announcements: ["Ward temple night: May 10"],
+  },
+  {
+    id: 3,
+    date: "2026-03-15",
+    meetingType: "regular",
+    presiding: "Bishop Perez",
+    conducting: "Brother Rodriguez",
+    openingHymn: { number: 6, title: "Redeemer of Israel" },
+    openingPrayer: "Sister Fernandez",
+    wardBusiness: [{ description: "none" }],
+    stakeBusiness: false,
+    sacramentHymn: { number: 172, title: "In Humility, Our Savior" },
+    speakers: [
+      { name: "Sister Looki", topic: "Holy Ghost", type: "speaker" },
+      { name: "Brother Moon", topic: "Baptism", type: "speaker" },
+    ],
+    closingHymn: { number: 7, title: "Israel, Israel, God Is Calling" },
+    closingPrayer: "Brother Celada",
+    announcements: ["none"],
+  },
+  {
+    id: 4,
+    date: "2026-03-22",
+    meetingType: "regular",
+    presiding: "Bishop Perez",
+    conducting: "Brother Perticarari",
+    openingHymn: { number: 8, title: "Awake and Arise" },
+    openingPrayer: "Sister Lombardo",
+    wardBusiness: [{ description: "none" }],
+    stakeBusiness: false,
+    sacramentHymn: { number: 171, title: "With Humble Heart" },
+    speakers: [
+      {
+        name: "Sister McMillan",
+        topic: "Faith in Jesus Christ",
+        type: "speaker",
+      },
+      { name: "Sister McCart", topic: "Atonement", type: "speaker" },
+    ],
+    closingHymn: { number: 9, title: "Come, Rejoice" },
+    closingPrayer: "Brother Gimenez",
+    announcements: ["General Conference is in 2 weeks"],
+  },
+  {
+    id: 5,
+    date: "2026-03-29",
+    meetingType: "regular",
+    presiding: "President Hansen",
+    conducting: "Bishop Perez",
+    openingHymn: { number: 10, title: "Come, Sing to the Lord" },
+    openingPrayer: "Sister Orozco",
+    wardBusiness: [{ description: "Sustaining of new Young Women Counselor" }],
+    stakeBusiness: true,
+    sacramentHymn: { number: 170, title: "God, Our Father, Hear Us Pray" },
+    speakers: [
+      { name: "Sister Chad", topic: "Faith in Jesus Christ", type: "speaker" },
+      { name: "President Hansen", topic: "Unknown", type: "speaker" },
+    ],
+    closingHymn: { number: 17, title: "Awake, Ye Saints of God, Awake!" },
+    closingPrayer: "Brother Paez",
+    announcements: ["General Conference next week!"],
+  },
+];
+
+export function getMeetings(date?: string | null): SacramentMeeting[] {
+  if (date) return meetings.filter((m) => m.date === date);
+  return meetings;
+}
+
+export function getMeetingById(id: number): SacramentMeeting | null {
+  return meetings.find((m) => m.id === id) ?? null;
+}

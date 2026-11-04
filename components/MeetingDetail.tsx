@@ -1,0 +1,1 @@
+// full agenda detail view
