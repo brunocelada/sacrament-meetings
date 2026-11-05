@@ -30,11 +30,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Suspense
           fallback={
-            <header
-              className="center py-4 mt-12 text-center bg-gray-800 text-white">
+            <header className="center py-4 mt-12 text-center">
               Loading...
             </header>
-        }>
+          }
+        >
           <Header />
         </Suspense>
         {children}
