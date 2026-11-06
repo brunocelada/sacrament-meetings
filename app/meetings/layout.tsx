@@ -1,4 +1,10 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Meetings",
+  description: "Sacrament Meetings agenda",
+};
 
 export default function MeetingsLayout({
   children,

@@ -10,7 +10,7 @@ export default async function CurrentMeetingPage() {
   const today = new Date();
   const dayOfWeek = today.getDay();
   const sunday = new Date(today);
-  sunday.setDate(today.getDate() + (7 - dayOfWeek));
+  sunday.setDate(today.getDate() + (7 - dayOfWeek) % 7);
 
   const sundayDate = [
     sunday.getFullYear(),
