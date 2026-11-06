@@ -4,7 +4,8 @@
   --background: #ffffff;
   --foreground: #171717;
   --color-primary: #c86b20;
-  --color-secondary: #599686;
+  --color-secondary: #324f45;
+  --color-secondary2: #599686;
   --color-tertiary: #163258;
 }
 
@@ -13,6 +14,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--color-primary);
   --color-secondary: var(--color-secondary);
+  --color-secondary2: var(--color-secondary2);
   --color-tertiary: var(--color-tertiary);
   --font-heading: var(--font-lora);
   --font-sans: var(--font-noto-sans);

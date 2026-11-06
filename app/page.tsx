@@ -14,7 +14,7 @@ export default function Home() {
             priority
           />
         </div>
-        <h1 className="text-4xl font-bold my-4 font-heading">
+        <h1 className="sm:text-4xl text-2xl font-bold my-4 font-heading">
           Sacrament Meetings
         </h1>
         <p className="text-base text-gray-700 font-heading">

@@ -19,7 +19,7 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
           {meeting.meetingType} meeting
         </p>
 
-        <h1 className="mb-2 text-3xl font-bold text-gray-900 font-heading">
+        <h1 className="mb-2 text-2xl sm:text-3xl font-bold text-gray-900 font-heading">
           Sacrament Meeting
         </h1>
 
@@ -29,14 +29,14 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
       {/* Meeting leadership */}
       <section className="mb-8 grid gap-4 sm:grid-cols-2">
         <div>
-          <h2 className="text-sm font-semibold uppercase text-gray-500">
+          <h2 className="text-sm font-semibold uppercase text-gray-600">
             Presiding
           </h2>
           <p className="mt-1 text-lg text-gray-900">{meeting.presiding}</p>
         </div>
 
         <div>
-          <h2 className="text-sm font-semibold uppercase text-gray-500">
+          <h2 className="text-sm font-semibold uppercase text-gray-600">
             Conducting
           </h2>
           <p className="mt-1 text-lg text-gray-900">{meeting.conducting}</p>
@@ -45,7 +45,10 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
       {/* Announcements */}
       <section className="mb-8">
-        <h2 className="mb-3 text-xl font-semibold text-gray-900">
+        <h2
+          className="mb-3 text-xl font-semibold text-gray-900
+        underline underline-offset-3 decoration-1 decoration-tertiary/25"
+        >
           Announcements
         </h2>
 
@@ -62,7 +65,12 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
       {/* Opening hymn and prayer */}
       <section className="mb-8">
-        <h2 className="mb-3 text-xl font-semibold text-gray-900">Opening</h2>
+        <h2
+          className="mb-3 text-xl font-semibold text-gray-900
+        underline underline-offset-3 decoration-1 decoration-tertiary/25"
+        >
+          Opening
+        </h2>
 
         <div className="space-y-3">
           <p className="text-gray-700">
@@ -79,7 +87,10 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
       {/* Ward business */}
       <section className="mb-8">
-        <h2 className="mb-3 text-xl font-semibold text-gray-900">
+        <h2
+          className="underline underline-offset-3 decoration-1 decoration-tertiary/25
+        mb-3 text-xl font-semibold text-gray-900"
+        >
           Ward and Stake Business
         </h2>
 
@@ -103,7 +114,10 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
       {/* Sacrament hymn */}
       <section className="mb-8">
-        <h2 className="mb-3 text-xl font-semibold text-gray-900">
+        <h2
+          className="underline underline-offset-3 decoration-1 decoration-tertiary/25
+        mb-3 text-xl font-semibold text-gray-900"
+        >
           The Sacrament
         </h2>
 
@@ -115,7 +129,10 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
       {/* Speakers and musical numbers */}
       <section className="mb-8">
-        <h2 className="mb-3 text-xl font-semibold text-gray-900">
+        <h2
+          className="underline underline-offset-3 decoration-1 decoration-tertiary/25
+        mb-3 text-xl font-semibold text-gray-900"
+        >
           Speakers and Musical Numbers
         </h2>
 
@@ -124,7 +141,7 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
             {meeting.speakers.map((item, index) => (
               <li
                 key={`${item.name}-${index}`}
-                className="border-l-2 border-secondary pl-4"
+                className="border-l-2 border-secondary2 pl-4"
               >
                 <p className="font-semibold text-gray-900">{item.name}</p>
 
@@ -145,7 +162,12 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
       {/* Closing hymn and prayer */}
       <section className="border-t border-gray-200 pt-6">
-        <h2 className="mb-3 text-xl font-semibold text-gray-900">Closing</h2>
+        <h2
+          className="underline underline-offset-3 decoration-1 decoration-tertiary/25
+        mb-3 text-xl font-semibold text-gray-900"
+        >
+          Closing
+        </h2>
 
         <div className="space-y-3">
           <p className="text-gray-700">

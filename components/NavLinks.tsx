@@ -15,7 +15,7 @@ export default function NavLinks() {
 
   return (
     <nav>
-      <ul className="flex justify-center gap-6 text-xl font-medium text-tertiary">
+      <ul className="flex justify-center gap-6 text-md sm:text-xl font-medium text-tertiary">
         {links.map((link) => {
           const isActive = pathname === link.href;
 

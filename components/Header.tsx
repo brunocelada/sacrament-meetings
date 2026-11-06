@@ -9,10 +9,12 @@ export default async function Header() {
   return (
     <header className="text-center py-2">
       <section>
-        <h1 className="text-4xl text-tertiary text-center pt-2 font-bold mb-2 font-heading">
+        <h1 className="sm:text-4xl text-3xl text-tertiary text-center pt-2 font-bold mb-2 font-heading">
           Ward Name
         </h1>
-        <p className="text-xl text-secondary font-normal italic">{today}</p>
+        <p className="text-lg sm:text-xl text-secondary font-normal italic">
+          {today}
+        </p>
       </section>
       <div className="mt-4">
         <NavLinks />
