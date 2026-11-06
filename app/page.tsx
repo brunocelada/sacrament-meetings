@@ -6,7 +6,7 @@ export default function Home() {
       <section className="text-center">
         <div className="relative w-full max-w-[1200px] mx-auto h-60 overflow-hidden rounded-md">
           <Image
-            className="object-cover"
+            className="object-cover sepia-50 hue-rotate-25"
             src="/hymns-banner.jpg"
             alt="Hymns Banner"
             fill
