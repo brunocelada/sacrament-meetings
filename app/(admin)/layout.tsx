@@ -1,0 +1,1 @@
+// (admin layout — authentication scaffolded in Week 05)

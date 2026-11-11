@@ -49,18 +49,18 @@ export default function MeetingCard({ meeting }: MeetingCardProps) {
 
         <div className="flex gap-4 text-gray-800">
           <p>
-            <span className="font-semibold">Opening:</span> #
-            {meeting.openingHymn.number}
+            <span className="font-semibold">Opening:</span>{" "}
+            {meeting.openingHymn ? `#${meeting.openingHymn.number}` : "No hymn"}
           </p>
 
           <p>
-            <span className="font-semibold">Sacramental:</span> #
-            {meeting.sacramentHymn.number}
+            <span className="font-semibold">Sacramental:</span>{" "}
+            {meeting.sacramentHymn ? `#${meeting.sacramentHymn.number}` : "No hymn"}
           </p>
 
           <p>
-            <span className="font-semibold">Closing:</span> #
-            {meeting.closingHymn.number}
+            <span className="font-semibold">Closing:</span>{" "}
+            {meeting.closingHymn ? `#${meeting.closingHymn.number}` : "No hymn"}
           </p>
         </div>
 
