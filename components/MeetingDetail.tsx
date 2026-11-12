@@ -40,9 +40,7 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
             Conducting
           </h2>
           <p className="mt-1 text-lg text-gray-900">
-            {meeting.conducting ?
-              `${meeting.conducting}`
-              : "Unknown"}
+            {meeting.conducting ? `${meeting.conducting}` : "Unknown"}
           </p>
         </div>
       </section>
@@ -79,16 +77,14 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
         <div className="space-y-3">
           <p className="text-gray-700">
             <span className="font-semibold">Opening Hymn: </span>
-            {meeting.openingHymn ?
-              `(#${meeting.openingHymn.number}) ${meeting.openingHymn.title}`
+            {meeting.openingHymn
+              ? `(#${meeting.openingHymn.number}) ${meeting.openingHymn.title}`
               : "No hymn"}
           </p>
 
           <p className="text-gray-700">
             <span className="font-semibold">Opening Prayer:</span>{" "}
-            {meeting.openingPrayer ?
-              `${meeting.openingPrayer}`
-              : "Unknown"}
+            {meeting.openingPrayer ? `${meeting.openingPrayer}` : "Unknown"}
           </p>
         </div>
       </section>
@@ -131,9 +127,9 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
         <p className="text-gray-700">
           <span className="font-semibold">Sacrament Hymn: </span>
-          {meeting.sacramentHymn ?
-              `(#${meeting.sacramentHymn.number}) ${meeting.sacramentHymn.title}`
-              : "No hymn"}
+          {meeting.sacramentHymn
+            ? `(#${meeting.sacramentHymn.number}) ${meeting.sacramentHymn.title}`
+            : "No hymn"}
         </p>
       </section>
 
@@ -182,16 +178,14 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
         <div className="space-y-3">
           <p className="text-gray-700">
             <span className="font-semibold">Closing Hymn: </span>
-            {meeting.closingHymn ?
-              `(#${meeting.closingHymn.number}) ${meeting.closingHymn.title}`
+            {meeting.closingHymn
+              ? `(#${meeting.closingHymn.number}) ${meeting.closingHymn.title}`
               : "No hymn"}
           </p>
 
           <p className="text-gray-700">
             <span className="font-semibold">Closing Prayer:</span>{" "}
-            {meeting.closingPrayer ?
-              `${meeting.closingPrayer}`
-              : "Unknown"}
+            {meeting.closingPrayer ? `${meeting.closingPrayer}` : "Unknown"}
           </p>
         </div>
       </section>

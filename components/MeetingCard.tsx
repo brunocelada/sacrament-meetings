@@ -55,7 +55,9 @@ export default function MeetingCard({ meeting }: MeetingCardProps) {
 
           <p>
             <span className="font-semibold">Sacramental:</span>{" "}
-            {meeting.sacramentHymn ? `#${meeting.sacramentHymn.number}` : "No hymn"}
+            {meeting.sacramentHymn
+              ? `#${meeting.sacramentHymn.number}`
+              : "No hymn"}
           </p>
 
           <p>
