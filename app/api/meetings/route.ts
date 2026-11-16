@@ -1,5 +1,5 @@
 // GET /api/meetings (POST is optional stretch)
-import { getMeetings } from "@/lib/meetings-db";
+import { getAllMeetings } from "@/lib/meetings-db";
 import { NextResponse } from "next/server";
 
 function isValidDate(date: string): boolean {
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     );
   }
 
-  const meetings = await getMeetings("", 1, date ?? undefined);
+  const meetings = await getAllMeetings(date ?? undefined);
 
   // If the date is valid, but there are no meetings that day
   //   if (date && meetings.length === 0) {

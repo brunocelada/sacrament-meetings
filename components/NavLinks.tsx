@@ -17,7 +17,11 @@ export default function NavLinks() {
     <nav>
       <ul className="flex justify-center gap-6 text-md sm:text-xl font-medium text-tertiary">
         {links.map((link) => {
-          const isActive = pathname === link.href;
+          const isActive =
+            pathname === link.href ||
+            (link.href === "/meetings" &&
+              pathname.startsWith("/meetings/") &&
+              !pathname.startsWith("/meetings/current"));
 
           return (
             <li key={link.href}>
