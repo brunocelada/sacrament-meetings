@@ -8,10 +8,7 @@ export default function NewMeetingPage() {
         Create Sacrament Meeting
       </h1>
 
-      <MeetingsForm
-        action={createMeeting}
-        mode="create"
-      />
+      <MeetingsForm action={createMeeting} mode="create" />
     </main>
   );
 }

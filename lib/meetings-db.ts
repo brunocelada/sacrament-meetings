@@ -255,11 +255,7 @@ export async function updateMeeting(
   }
 
   if (updates.openingHymn !== undefined) {
-    addField(
-      "opening_hymn",
-      JSON.stringify(updates.openingHymn),
-      "::jsonb",
-    );
+    addField("opening_hymn", JSON.stringify(updates.openingHymn), "::jsonb");
   }
 
   if (updates.openingPrayer !== undefined) {
@@ -267,11 +263,7 @@ export async function updateMeeting(
   }
 
   if (updates.wardBusiness !== undefined) {
-    addField(
-      "ward_business",
-      JSON.stringify(updates.wardBusiness),
-      "::jsonb",
-    );
+    addField("ward_business", JSON.stringify(updates.wardBusiness), "::jsonb");
   }
 
   if (updates.stakeBusiness !== undefined) {
@@ -291,11 +283,7 @@ export async function updateMeeting(
   }
 
   if (updates.closingHymn !== undefined) {
-    addField(
-      "closing_hymn",
-      JSON.stringify(updates.closingHymn),
-      "::jsonb",
-    );
+    addField("closing_hymn", JSON.stringify(updates.closingHymn), "::jsonb");
   }
 
   if (updates.closingPrayer !== undefined) {

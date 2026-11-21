@@ -38,21 +38,22 @@ export const MeetingFormSchema = z
   .object({
     date: z.iso.date(),
 
-    meetingType: z.enum([
-      "testimony",
-      "regular",
-      "stake",
-      "general",
-    ]),
+    meetingType: z.enum(["testimony", "regular", "stake", "general"]),
 
-    presiding: z.string().trim().min(1, "Presiding is required."),
-    conducting: z.string().trim(),
+    presiding: z.string().trim().min(3, "Presiding is required. Must contain at least 3 characters."),
+    conducting: z.string().trim().refine(
+  (value) => value.length === 0 || value.length >= 3,
+      "Must contain at least 3 characters",
+    ),
 
     announcementsText: z.string(),
 
     openingHymnNumber: z.string().trim(),
     openingHymnTitle: z.string().trim(),
-    openingPrayer: z.string().trim(),
+    openingPrayer: z.string().trim().refine(
+  (value) => value.length === 0 || value.length >= 3,
+  "Must contain at least 3 characters",
+),
 
     wardBusinessText: z.string(),
     stakeBusiness: z.boolean(),
@@ -64,14 +65,16 @@ export const MeetingFormSchema = z
 
     closingHymnNumber: z.string().trim(),
     closingHymnTitle: z.string().trim(),
-    closingPrayer: z.string().trim(),
+    closingPrayer: z.string().trim().refine(
+  (value) => value.length === 0 || value.length >= 3,
+  "Must contain at least 3 characters",
+),
   })
   .superRefine((data, ctx) => {
     const requiresConducting = data.meetingType !== "stake";
     const requiresPrayers = data.meetingType !== "stake";
     const requiresHymns =
-      data.meetingType === "regular" ||
-      data.meetingType === "testimony";
+      data.meetingType === "regular" || data.meetingType === "testimony";
     const requiresParticipants = data.meetingType === "regular";
 
     // Conditional conducting requirement.
@@ -85,8 +88,16 @@ export const MeetingFormSchema = z
 
     // Conditional prayer requirements.
     const prayers = [
-      { value: data.openingPrayer, path: "openingPrayer", label: "Opening prayer" },
-      { value: data.closingPrayer, path: "closingPrayer", label: "Closing prayer" },
+      {
+        value: data.openingPrayer,
+        path: "openingPrayer",
+        label: "Opening prayer",
+      },
+      {
+        value: data.closingPrayer,
+        path: "closingPrayer",
+        label: "Closing prayer",
+      },
     ];
 
     if (requiresPrayers) {
@@ -161,6 +172,14 @@ export const MeetingFormSchema = z
       const parts = line.split(";").map((part) => part.trim());
       const [name, topic, type] = parts;
 
+      if (name && name.length < 3) {
+  ctx.addIssue({
+    code: "custom",
+    path: ["speakersText"],
+    message: `Line ${index + 1}: name must contain at least 3 characters.`,
+  });
+}
+
       if (
         parts.length !== 3 ||
         !name ||
@@ -202,15 +221,12 @@ export const MeetingFormSchema = z
 
     announcements: parseLines(data.announcementsText),
 
-    openingHymn: createHymn(
-      data.openingHymnNumber,
-      data.openingHymnTitle,
-    ),
+    openingHymn: createHymn(data.openingHymnNumber, data.openingHymnTitle),
     openingPrayer: data.openingPrayer,
 
-    wardBusiness: parseLines(data.wardBusinessText).map(
-      (description) => ({ description }),
-    ),
+    wardBusiness: parseLines(data.wardBusinessText).map((description) => ({
+      description,
+    })),
 
     stakeBusiness: data.stakeBusiness,
 
@@ -221,10 +237,7 @@ export const MeetingFormSchema = z
 
     speakers: parseSpeakers(data.speakersText),
 
-    closingHymn: createHymn(
-      data.closingHymnNumber,
-      data.closingHymnTitle,
-    ),
+    closingHymn: createHymn(data.closingHymnNumber, data.closingHymnTitle),
     closingPrayer: data.closingPrayer,
   }));
 

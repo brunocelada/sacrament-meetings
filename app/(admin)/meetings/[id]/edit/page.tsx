@@ -3,7 +3,7 @@ import { updateMeeting } from "@/lib/actions";
 import { getMeetingById } from "@/lib/meetings-db";
 import { notFound } from "next/navigation";
 
-export const instant = false
+export const instant = false;
 
 interface EditMeetingPageProps {
   params: Promise<{ id: string }>;

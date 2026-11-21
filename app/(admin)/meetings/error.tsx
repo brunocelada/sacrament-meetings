@@ -15,13 +15,11 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
 
   return (
     <main className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
-      <h1 className="text-3xl font-bold text-primary">
-        Something went wrong
-      </h1>
+      <h1 className="text-3xl font-bold text-primary">Something went wrong</h1>
 
       <p className="mt-4 max-w-md text-gray-600">
-        An unexpected error occurred while processing your request.
-        Please try again or return to the meetings page.
+        An unexpected error occurred while processing your request. Please try
+        again or return to the meetings page.
       </p>
 
       {error.digest && (

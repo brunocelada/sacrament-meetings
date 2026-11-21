@@ -11,13 +11,13 @@ interface MeetingPageProps {
 
 export default async function MeetingPage({ params }: MeetingPageProps) {
   const { id: rawId } = await params;
-const id = Number(rawId);
+  const id = Number(rawId);
 
-if (!Number.isSafeInteger(id) || id <= 0) {
-  notFound();
-}
+  if (!Number.isSafeInteger(id) || id <= 0) {
+    notFound();
+  }
 
-const meeting = await getMeetingById(id);
+  const meeting = await getMeetingById(id);
 
   if (!meeting) {
     notFound();

@@ -22,8 +22,7 @@ export default function NavLinks() {
             (link.href === "/meetings" &&
               pathname.startsWith("/meetings/") &&
               !pathname.startsWith("/meetings/current") &&
-              pathname !== "/meetings/new"
-            );
+              pathname !== "/meetings/new");
 
           return (
             <li key={link.href}>

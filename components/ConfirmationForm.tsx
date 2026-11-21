@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useId,
-  useRef,
-  useState,
-  type FormEvent,
-  type ReactNode,
-} from "react";
+import { useId, useRef, useState, type FormEvent, type ReactNode } from "react";
 
 interface ConfirmationFormProps {
   action: (formData: FormData) => void | Promise<void>;
@@ -16,8 +10,9 @@ interface ConfirmationFormProps {
   submitLabel: string;
   confirmLabel: string;
   cancelLabel?: string;
-    submitClassName?: string;
-    confirmClassName?: string;
+  submitClassName?: string;
+  confirmClassName?: string;
+  isPending?: boolean;
 }
 
 export default function ConfirmationForm({
@@ -28,8 +23,9 @@ export default function ConfirmationForm({
   submitLabel,
   confirmLabel,
   cancelLabel = "Cancel",
-    submitClassName = "bg-secondary hover:bg-primary text-white",
+  submitClassName = "bg-secondary hover:bg-primary text-white",
   confirmClassName = "bg-secondary hover:bg-primary text-white",
+  isPending = false,
 }: ConfirmationFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const confirmedRef = useRef(false);
@@ -68,7 +64,11 @@ export default function ConfirmationForm({
         <div className="flex justify-end">
           <button
             type="submit"
-            className={`rounded-md px-5 py-2.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${submitClassName}`}
+            disabled={isPending}
+            className={`rounded-md px-5 py-2.5 text-sm font-medium transition-colors 
+                focus-visible:outline-2 focus-visible:outline-offset-2
+                ${submitClassName}
+                disabled:cursor-not-allowed disabled:opacity-50`}
           >
             {submitLabel}
           </button>
@@ -84,10 +84,7 @@ export default function ConfirmationForm({
             aria-describedby={messageId}
             className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl"
           >
-            <h2
-              id={titleId}
-              className="text-xl font-semibold text-gray-900"
-            >
+            <h2 id={titleId} className="text-xl font-semibold text-gray-900">
               {title}
             </h2>
 
@@ -110,7 +107,6 @@ export default function ConfirmationForm({
               <button
                 type="button"
                 onClick={handleConfirm}
-                
                 className={`rounded-md px-4 py-2 text-sm font-medium text-white transition-colors ${confirmClassName}`}
               >
                 {confirmLabel}
