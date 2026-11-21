@@ -40,20 +40,29 @@ export const MeetingFormSchema = z
 
     meetingType: z.enum(["testimony", "regular", "stake", "general"]),
 
-    presiding: z.string().trim().min(3, "Presiding is required. Must contain at least 3 characters."),
-    conducting: z.string().trim().refine(
-  (value) => value.length === 0 || value.length >= 3,
-      "Must contain at least 3 characters",
-    ),
+    presiding: z
+      .string()
+      .trim()
+      .min(3, "Presiding is required. Must contain at least 3 characters."),
+    conducting: z
+      .string()
+      .trim()
+      .refine(
+        (value) => value.length === 0 || value.length >= 3,
+        "Must contain at least 3 characters",
+      ),
 
     announcementsText: z.string(),
 
     openingHymnNumber: z.string().trim(),
     openingHymnTitle: z.string().trim(),
-    openingPrayer: z.string().trim().refine(
-  (value) => value.length === 0 || value.length >= 3,
-  "Must contain at least 3 characters",
-),
+    openingPrayer: z
+      .string()
+      .trim()
+      .refine(
+        (value) => value.length === 0 || value.length >= 3,
+        "Must contain at least 3 characters",
+      ),
 
     wardBusinessText: z.string(),
     stakeBusiness: z.boolean(),
@@ -65,10 +74,13 @@ export const MeetingFormSchema = z
 
     closingHymnNumber: z.string().trim(),
     closingHymnTitle: z.string().trim(),
-    closingPrayer: z.string().trim().refine(
-  (value) => value.length === 0 || value.length >= 3,
-  "Must contain at least 3 characters",
-),
+    closingPrayer: z
+      .string()
+      .trim()
+      .refine(
+        (value) => value.length === 0 || value.length >= 3,
+        "Must contain at least 3 characters",
+      ),
   })
   .superRefine((data, ctx) => {
     const requiresConducting = data.meetingType !== "stake";
@@ -173,12 +185,12 @@ export const MeetingFormSchema = z
       const [name, topic, type] = parts;
 
       if (name && name.length < 3) {
-  ctx.addIssue({
-    code: "custom",
-    path: ["speakersText"],
-    message: `Line ${index + 1}: name must contain at least 3 characters.`,
-  });
-}
+        ctx.addIssue({
+          code: "custom",
+          path: ["speakersText"],
+          message: `Line ${index + 1}: name must contain at least 3 characters.`,
+        });
+      }
 
       if (
         parts.length !== 3 ||

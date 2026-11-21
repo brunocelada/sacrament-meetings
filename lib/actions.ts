@@ -32,7 +32,7 @@ type MeetingFormValues = {
 
 type State = {
   message: string;
-    errors: Record<string, string[]>;
+  errors: Record<string, string[]>;
   values: MeetingFormValues | null;
   revision: number;
 };
@@ -86,17 +86,17 @@ export async function createMeeting(
   _prevState: State,
   formData: FormData,
 ): Promise<State> {
-    const values = getSubmittedValues(formData);
-    const revision = _prevState.revision + 1;
-    
+  const values = getSubmittedValues(formData);
+  const revision = _prevState.revision + 1;
+
   const result = validateMeetingForm(formData);
 
   if (!result.success) {
     return {
       message: "Please correct the corresponding errors.",
-        errors: getFieldErrors(result.error.issues),
+      errors: getFieldErrors(result.error.issues),
       values,
-  revision,
+      revision,
     };
   }
 
@@ -106,9 +106,9 @@ export async function createMeeting(
     console.error("Failed to create meeting:", error);
     return {
       message: "Unable to create the meeting. Please try again.",
-        errors: {},
+      errors: {},
       values,
-  revision,
+      revision,
     };
   }
 
@@ -122,9 +122,9 @@ export async function updateMeeting(
   _prevState: State,
   formData: FormData,
 ): Promise<State> {
-    const values = getSubmittedValues(formData);
-    const revision = _prevState.revision + 1;
-    
+  const values = getSubmittedValues(formData);
+  const revision = _prevState.revision + 1;
+
   if (!Number.isSafeInteger(id) || id <= 0) {
     return {
       message: "Invalid meeting ID.",
@@ -137,9 +137,9 @@ export async function updateMeeting(
   if (!result.success) {
     return {
       message: "Please correct the corresponding errors.",
-        errors: getFieldErrors(result.error.issues),
+      errors: getFieldErrors(result.error.issues),
       values,
-  revision,
+      revision,
     };
   }
 
@@ -151,18 +151,18 @@ export async function updateMeeting(
     console.error("Failed to update meeting:", error);
     return {
       message: "Unable to update the meeting. Please try again.",
-        errors: {},
+      errors: {},
       values,
-  revision,
+      revision,
     };
   }
 
   if (!updatedMeeting) {
     return {
       message: "Meeting not found.",
-        errors: {},
+      errors: {},
       values,
-  revision,
+      revision,
     };
   }
 

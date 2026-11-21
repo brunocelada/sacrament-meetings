@@ -101,9 +101,9 @@ function getParticipantsError(value: string): string {
   for (let index = 0; index < lines.length; index++) {
     const parts = lines[index].split(";").map((part) => part.trim());
     const [name, topic, type] = parts;
-if (name.length < 3) {
-  return "Each participant's name must contain at least 3 characters.";
-}
+    if (name.length < 3) {
+      return "Each participant's name must contain at least 3 characters.";
+    }
     if (
       parts.length !== 3 ||
       !name ||
@@ -212,8 +212,8 @@ export default function MeetingsForm({
     : baseConfirmationMessage;
 
   return (
-      <ConfirmationForm
-          key={state.revision}
+    <ConfirmationForm
+      key={state.revision}
       action={formAction}
       isPending={isPending}
       title={isEditing ? "Save Meeting Changes?" : "Create New Meeting?"}
@@ -286,8 +286,8 @@ export default function MeetingsForm({
             id="presiding"
             name="presiding"
             type="text"
-                      required
-                      minLength={3}
+            required
+            minLength={3}
             placeholder="e.g. Bishop Johnson"
             defaultValue={state.values?.presiding ?? meeting?.presiding ?? ""}
             className={inputClass}
@@ -304,8 +304,8 @@ export default function MeetingsForm({
           <input
             id="conducting"
             name="conducting"
-                      type="text"
-                      minLength={3}
+            type="text"
+            minLength={3}
             required={requiresConducting}
             placeholder="e.g. Brother Smith"
             defaultValue={state.values?.conducting ?? meeting?.conducting ?? ""}
@@ -335,7 +335,11 @@ export default function MeetingsForm({
               step="1"
               required={requiresHymns}
               placeholder="1-1212"
-              defaultValue={state.values?.openingHymnNumber ?? meeting?.openingHymn?.number.toString() ?? ""}
+              defaultValue={
+                state.values?.openingHymnNumber ??
+                meeting?.openingHymn?.number.toString() ??
+                ""
+              }
               onChange={() =>
                 updateHymnPairValidity("openingHymnNumber", "openingHymnTitle")
               }
@@ -358,7 +362,11 @@ export default function MeetingsForm({
               name="openingHymnTitle"
               type="text"
               placeholder="Enter the hymn title if known"
-              defaultValue={state.values?.openingHymnTitle ?? meeting?.openingHymn?.title ?? ""}
+              defaultValue={
+                state.values?.openingHymnTitle ??
+                meeting?.openingHymn?.title ??
+                ""
+              }
               onChange={() =>
                 updateHymnPairValidity("openingHymnNumber", "openingHymnTitle")
               }
@@ -380,11 +388,13 @@ export default function MeetingsForm({
           <input
             id="openingPrayer"
             name="openingPrayer"
-                      type="text"
-                      minLength={3}
+            type="text"
+            minLength={3}
             required={requiresPrayers}
             placeholder="e.g. Sister Johnson"
-            defaultValue={state.values?.openingPrayer ?? meeting?.openingPrayer ?? ""}
+            defaultValue={
+              state.values?.openingPrayer ?? meeting?.openingPrayer ?? ""
+            }
             className={inputClass}
             aria-describedby="openingPrayer-error"
           />
@@ -409,7 +419,11 @@ export default function MeetingsForm({
             placeholder={
               "Ward temple night: Jan 30\nGeneral Conference next month"
             }
-            defaultValue={state.values?.announcementsText ?? meeting?.announcements?.join("\n") ?? ""}
+            defaultValue={
+              state.values?.announcementsText ??
+              meeting?.announcements?.join("\n") ??
+              ""
+            }
             className={inputClass}
             aria-describedby="announcementsText-error"
           />
@@ -433,10 +447,12 @@ export default function MeetingsForm({
             rows={3}
             placeholder="Sustaining of new Sunday School president"
             defaultValue={
-  state.values?.wardBusinessText ??
-  meeting?.wardBusiness.map((item) => item.description).join("\n") ??
-  ""
-}
+              state.values?.wardBusinessText ??
+              meeting?.wardBusiness
+                .map((item) => item.description)
+                .join("\n") ??
+              ""
+            }
             className={inputClass}
             aria-describedby="wardBusinessText-error"
           />
@@ -457,7 +473,9 @@ export default function MeetingsForm({
             id="stakeBusiness"
             type="checkbox"
             name="stakeBusiness"
-            defaultChecked={state.values?.stakeBusiness ?? meeting?.stakeBusiness ?? false}
+            defaultChecked={
+              state.values?.stakeBusiness ?? meeting?.stakeBusiness ?? false
+            }
             className="h-4 w-4 rounded border-gray-300"
             aria-describedby="stakeBusiness-error"
           />
@@ -485,7 +503,11 @@ export default function MeetingsForm({
               step="1"
               required={requiresHymns}
               placeholder="1-1212"
-              defaultValue={state.values?.sacramentHymnNumber ?? meeting?.sacramentHymn?.number.toString() ?? ""}
+              defaultValue={
+                state.values?.sacramentHymnNumber ??
+                meeting?.sacramentHymn?.number.toString() ??
+                ""
+              }
               onChange={() =>
                 updateHymnPairValidity(
                   "sacramentHymnNumber",
@@ -511,7 +533,11 @@ export default function MeetingsForm({
               name="sacramentHymnTitle"
               type="text"
               placeholder="Enter the hymn title if known"
-              defaultValue={state.values?.sacramentHymnTitle ?? meeting?.sacramentHymn?.title ?? ""}
+              defaultValue={
+                state.values?.sacramentHymnTitle ??
+                meeting?.sacramentHymn?.title ??
+                ""
+              }
               onChange={() =>
                 updateHymnPairValidity(
                   "sacramentHymnNumber",
@@ -549,12 +575,12 @@ export default function MeetingsForm({
               "Sister Gomez; The Holy Ghost; speaker\nPrimary Choir;; musical-number"
             }
             defaultValue={
-  state.values?.speakersText ??
-  meeting?.speakers
-    .map((item) => `${item.name}; ${item.topic}; ${item.type}`)
-    .join("\n") ??
-  ""
-}
+              state.values?.speakersText ??
+              meeting?.speakers
+                .map((item) => `${item.name}; ${item.topic}; ${item.type}`)
+                .join("\n") ??
+              ""
+            }
             onChange={(event) =>
               event.currentTarget.setCustomValidity(
                 getParticipantsError(event.currentTarget.value),
@@ -592,7 +618,11 @@ export default function MeetingsForm({
               step="1"
               required={requiresHymns}
               placeholder="1-1212"
-              defaultValue={state.values?.closingHymnNumber ?? meeting?.closingHymn?.number.toString() ?? ""}
+              defaultValue={
+                state.values?.closingHymnNumber ??
+                meeting?.closingHymn?.number.toString() ??
+                ""
+              }
               onChange={() =>
                 updateHymnPairValidity("closingHymnNumber", "closingHymnTitle")
               }
@@ -615,7 +645,11 @@ export default function MeetingsForm({
               name="closingHymnTitle"
               type="text"
               placeholder="Enter the hymn title if known"
-              defaultValue={state.values?.closingHymnTitle ?? meeting?.closingHymn?.title ?? ""}
+              defaultValue={
+                state.values?.closingHymnTitle ??
+                meeting?.closingHymn?.title ??
+                ""
+              }
               onChange={() =>
                 updateHymnPairValidity("closingHymnNumber", "closingHymnTitle")
               }
@@ -637,11 +671,13 @@ export default function MeetingsForm({
           <input
             id="closingPrayer"
             name="closingPrayer"
-                      type="text"
-                      minLength={3}
+            type="text"
+            minLength={3}
             required={requiresPrayers}
             placeholder="e.g. Brother Johnson"
-            defaultValue={state.values?.closingPrayer ?? meeting?.closingPrayer ?? ""}
+            defaultValue={
+              state.values?.closingPrayer ?? meeting?.closingPrayer ?? ""
+            }
             className={inputClass}
             aria-describedby="closingPrayer-error"
           />
