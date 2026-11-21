@@ -1,8 +1,8 @@
 export type MeetingType =
   | "testimony"
   | "regular"
-  | "stake" // non-sacrament meeting
-  | "general"; // non-sacrament meeting
+  | "stake"
+  | "general";
 
 export interface Hymn {
   number: number;
@@ -21,8 +21,6 @@ export interface WardBusinessItem {
 
 export interface SacramentMeeting {
   id: number;
-  // ISO date string: "YYYY-MM-DD":
-  // const today = new Date().toISOString().split("T")[0];
   date: string;
   meetingType: MeetingType;
   presiding: string;

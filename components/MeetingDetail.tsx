@@ -1,5 +1,6 @@
-// full agenda detail view
 import type { SacramentMeeting } from "@/lib/types";
+import DeleteMeetingForm from "@/components/DeleteMeetingForm";
+import Link from "next/link";
 
 interface MeetingDetailProps {
   meeting: SacramentMeeting;
@@ -13,6 +14,27 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
 
   return (
     <article className="mx-auto max-w-3xl rounded-lg bg-white p-6 shadow-sm md:p-8">
+      <div className="mb-6 flex justify-between items-center w-full">
+        <Link
+          href={"/meetings"}
+          className="rounded-md border border-tertiary px-4 py-2 text-sm
+          font-medium text-tertiary transition-colors hover:bg-primary
+          hover:text-white hover:border-primary"
+        >
+          Back to meetings
+        </Link>
+        
+      {/* Edit action */}
+        <Link
+          href={`/meetings/${meeting.id}/edit`}
+          className="rounded-md border border-secondary px-4 py-2 text-sm
+          font-medium text-secondary transition-colors hover:bg-secondary
+          hover:text-white"
+        >
+          Edit Meeting
+        </Link>
+      </div>
+      
       {/* Meeting header */}
       <section className="mb-8 border-b border-gray-200 pb-6 text-center">
         <p className="mb-2 text-sm font-medium uppercase tracking-wider text-secondary">
@@ -189,6 +211,9 @@ export default function MeetingDetail({ meeting }: MeetingDetailProps) {
           </p>
         </div>
       </section>
+
+      {/* Delete action */}
+      <DeleteMeetingForm meetingId={meeting.id} />
     </article>
   );
 }

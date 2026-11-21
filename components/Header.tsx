@@ -1,4 +1,3 @@
-// Ward Name + current date
 import NavLinks from "@/components/NavLinks";
 import { connection } from "next/server";
 
@@ -10,7 +9,7 @@ export default async function Header() {
     <header className="text-center py-2">
       <section>
         <h1 className="sm:text-4xl text-3xl text-tertiary text-center pt-2 font-bold mb-2 font-heading">
-          Ward Name
+          Parque Urquiza Ward
         </h1>
         <p className="text-lg sm:text-xl text-secondary font-normal italic">
           {today}

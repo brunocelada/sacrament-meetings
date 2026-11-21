@@ -1,4 +1,3 @@
-// redirects to current Sunday's meeting
 import { redirect } from "next/navigation";
 import { getMeetings } from "@/lib/meetings-db";
 import { connection } from "next/server";

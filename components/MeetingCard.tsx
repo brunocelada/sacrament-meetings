@@ -1,6 +1,6 @@
-// summary card for list view
 import Link from "next/link";
 import type { SacramentMeeting } from "@/lib/types";
+import DeleteMeetingForm from "@/components/DeleteMeetingForm";
 
 interface MeetingCardProps {
   meeting: SacramentMeeting;
@@ -71,7 +71,9 @@ export default function MeetingCard({ meeting }: MeetingCardProps) {
           {meeting.speakers.filter((item) => item.type === "speaker").length}
         </p>
       </div>
-
+      
+      {/* Meeting actions */}
+      <div className="flex flex-wrap items-center gap-3">
       <Link
         href={`/meetings/${meeting.id}`}
         className="mt-5 inline-block rounded-md bg-secondary px-4 py-2 text-sm 
@@ -79,7 +81,18 @@ export default function MeetingCard({ meeting }: MeetingCardProps) {
         focus-visible:outline-offset-2 focus-visible:outline-blue-700"
       >
         View Meeting Details
-      </Link>
+        </Link>
+        <Link
+        href={`/meetings/${meeting.id}/edit`}
+        className="mt-5 inline-block rounded-md bg-secondary px-4 py-2 text-sm 
+        font-medium text-white transition-colors hover:bg-primary focus-visible:outline-2 
+        focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+      >
+        Edit
+        </Link>
+
+        <DeleteMeetingForm meetingId={meeting.id} />
+      </div>
     </article>
   );
 }

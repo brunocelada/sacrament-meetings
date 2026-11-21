@@ -1,4 +1,3 @@
-// active-link navigation
 "use client";
 
 import Link from "next/link";
@@ -8,6 +7,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/meetings/current", label: "Current Meeting" },
   { href: "/meetings", label: "Meetings" },
+  { href: "/meetings/new", label: "New Meeting" },
 ];
 
 export default function NavLinks() {
@@ -21,7 +21,9 @@ export default function NavLinks() {
             pathname === link.href ||
             (link.href === "/meetings" &&
               pathname.startsWith("/meetings/") &&
-              !pathname.startsWith("/meetings/current"));
+              !pathname.startsWith("/meetings/current") &&
+              pathname !== "/meetings/new"
+            );
 
           return (
             <li key={link.href}>
