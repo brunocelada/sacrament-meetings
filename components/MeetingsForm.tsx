@@ -84,13 +84,6 @@ function FieldError({ id, errors }: { id: string; errors?: string[] }) {
   );
 }
 
-function hymnText(number: number | undefined, title: string | undefined) {
-  return {
-    number: number ? String(number) : "",
-    title: title ?? "",
-  };
-}
-
 // Validate the participant format before submitting the form.
 function getParticipantsError(value: string): string {
   const lines = value
@@ -168,21 +161,6 @@ export default function MeetingsForm({
   mode,
 }: MeetingsFormProps) {
   const [state, formAction, isPending] = useActionState(action, initialState);
-
-  const openingHymn = hymnText(
-    meeting?.openingHymn?.number,
-    meeting?.openingHymn?.title,
-  );
-
-  const sacramentHymn = hymnText(
-    meeting?.sacramentHymn?.number,
-    meeting?.sacramentHymn?.title,
-  );
-
-  const closingHymn = hymnText(
-    meeting?.closingHymn?.number,
-    meeting?.closingHymn?.title,
-  );
 
   const [meetingType, setMeetingType] = useState<MeetingType>(
     meeting?.meetingType ?? "regular",
