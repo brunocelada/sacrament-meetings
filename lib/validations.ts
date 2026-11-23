@@ -1,6 +1,51 @@
 import { z } from "zod";
 import type { Hymn, SpeakerItem } from "./types";
 
+// Validate database records against the domain model.
+export const SacramentMeetingSchema = z.object({
+  id: z.number().int().positive(),
+  date: z.iso.date(),
+  meetingType: z.enum(["testimony", "regular", "stake", "general"]),
+  presiding: z.string(),
+  conducting: z.string(),
+  announcements: z.array(z.string()),
+  openingHymn: z
+    .object({
+      number: z.number().int().positive(),
+      title: z.string(),
+    })
+    .nullable(),
+  openingPrayer: z.string(),
+  wardBusiness: z.array(
+    z.object({
+      description: z.string(),
+    }),
+  ),
+  stakeBusiness: z.boolean(),
+  sacramentHymn: z
+    .object({
+      number: z.number().int().positive(),
+      title: z.string(),
+    })
+    .nullable(),
+  speakers: z.array(
+    z.object({
+      name: z.string(),
+      topic: z.string(),
+      type: z.enum(["speaker", "musical-number"]),
+    }),
+  ),
+  closingHymn: z
+    .object({
+      number: z.number().int().positive(),
+      title: z.string(),
+    })
+    .nullable(),
+  closingPrayer: z.string(),
+});
+
+export const SacramentMeetingsSchema = z.array(SacramentMeetingSchema);
+
 // A hymn can have a number without a title.
 function createHymn(number: string, title: string): Hymn | null {
   if (!number) return null;

@@ -17,12 +17,19 @@ export default async function MeetingsPage({
 }: MeetingsPageProps) {
   const params = await searchParams;
   const query = params.query ?? "";
-  const currentPage = Number(params.page) || 1;
 
-  const [meetings, totalPages] = await Promise.all([
-    getMeetings(query, currentPage),
-    getMeetingsTotalPages(query),
-  ]);
+  const requestedPage = Number(params.page);
+
+  const validPage =
+    Number.isSafeInteger(requestedPage) && requestedPage > 0
+      ? requestedPage
+      : 1;
+
+  const totalPages = await getMeetingsTotalPages(query);
+
+  const currentPage = totalPages > 0 ? Math.min(validPage, totalPages) : 1;
+
+  const meetings = await getMeetings(query, currentPage);
 
   return (
     <main className="items-center flex flex-col mx-auto max-w-5xl px-4 py-2">

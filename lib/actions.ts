@@ -177,7 +177,7 @@ export async function updateMeeting(
 // DELETE
 export async function deleteMeeting(id: number, _formData: FormData) {
   void _formData;
-  
+
   if (!Number.isSafeInteger(id) || id <= 0) {
     throw new Error("Invalid meeting ID.");
   }

@@ -1,5 +1,6 @@
 import type { SacramentMeeting } from "./types";
 import { neon } from "@neondatabase/serverless";
+import { SacramentMeetingSchema, SacramentMeetingsSchema } from "./validations";
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -74,7 +75,7 @@ END AS speakers,
     ORDER BY date DESC
     LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
-  return rows as unknown as SacramentMeeting[];
+  return SacramentMeetingsSchema.parse(rows);
 }
 
 export async function getAllMeetings(
@@ -110,7 +111,7 @@ END AS speakers,
     ORDER BY id
   `;
 
-  return rows as unknown as SacramentMeeting[];
+  return SacramentMeetingsSchema.parse(rows);
 }
 
 export async function getMeetingsTotalPages(
@@ -157,7 +158,7 @@ END AS speakers,
       closing_prayer              AS "closingPrayer"
     FROM meetings WHERE id = ${id}
   `;
-  return (rows[0] as unknown as SacramentMeeting) ?? null;
+  return rows.length > 0 ? SacramentMeetingSchema.parse(rows[0]) : null;
 }
 
 export async function addMeeting(
@@ -212,7 +213,7 @@ export async function addMeeting(
     ],
   );
 
-  return rows[0] as SacramentMeeting;
+  return SacramentMeetingSchema.parse(rows[0]);
 }
 
 export async function updateMeeting(
@@ -305,7 +306,7 @@ export async function updateMeeting(
     values,
   );
 
-  return (rows[0] as SacramentMeeting | undefined) ?? null;
+  return rows.length > 0 ? SacramentMeetingSchema.parse(rows[0]) : null;
 }
 
 export async function deleteMeeting(id: number): Promise<boolean> {
