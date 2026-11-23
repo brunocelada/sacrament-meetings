@@ -9,7 +9,7 @@ export async function GET(
   const { id } = await params;
   const meetingId = Number(id);
 
-  if (!Number.isInteger(meetingId) || meetingId <= 0) {
+  if (!/^\d+$/.test(id) || !Number.isSafeInteger(meetingId) || meetingId <= 0) {
     return NextResponse.json({ error: "Invalid meeting ID" }, { status: 400 });
   }
 

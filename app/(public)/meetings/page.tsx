@@ -45,7 +45,7 @@ export default async function MeetingsPage({
           ))}
         </div>
 
-        <Pagination totalPages={totalPages} />
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
       </div>
     </main>
   );

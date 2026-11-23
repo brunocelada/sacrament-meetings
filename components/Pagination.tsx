@@ -5,12 +5,12 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   totalPages: number;
+  currentPage: number;
 }
 
-export function Pagination({ totalPages }: PaginationProps) {
+export function Pagination({ totalPages, currentPage }: PaginationProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
 
   function createPageURL(page: number) {
     const params = new URLSearchParams(searchParams.toString());
