@@ -81,6 +81,15 @@ function getSubmittedValues(formData: FormData): MeetingFormValues {
   };
 }
 
+function isUniqueConstraintViolation(error: unknown): boolean {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    error.code === "23505"
+  );
+}
+
 // CREATE
 export async function createMeeting(
   _prevState: State,
@@ -102,8 +111,19 @@ export async function createMeeting(
 
   try {
     await addMeeting(result.data);
-  } catch (error) {
+    } catch (error) {
+    if (isUniqueConstraintViolation(error)) {
+      return {
+        message:
+          "A meeting already exists for this date. Please choose a different date.",
+        errors: {},
+        values,
+        revision,
+      };
+    }
+
     console.error("Failed to create meeting:", error);
+
     return {
       message: "Unable to create the meeting. Please try again.",
       errors: {},
