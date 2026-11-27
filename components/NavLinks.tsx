@@ -10,14 +10,18 @@ const links = [
   { href: "/meetings/new", label: "New Meeting" },
 ];
 
-export default function NavLinks({ isAdmin }: { isAdmin: boolean }) {
+export default function NavLinks({
+  canManageMeetings,
+}: {
+  canManageMeetings: boolean;
+}) {
   const pathname = usePathname();
 
   return (
     <nav>
       <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm sm:text-base font-medium text-tertiary">
         {links
-          .filter((link) => link.href !== "/meetings/new" || isAdmin)
+          .filter((link) => link.href !== "/meetings/new" || canManageMeetings)
           .map((link) => {
             const isActive =
               pathname === link.href ||

@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { requireAdmin } from "@/lib/auth-utils";
+import { requireMeetingManager } from "@/lib/auth-utils";
 
 import {
   addMeeting,
@@ -96,7 +96,7 @@ export async function createMeeting(
   _prevState: State,
   formData: FormData,
 ): Promise<State> {
-  await requireAdmin();
+  await requireMeetingManager();
 
   const values = getSubmittedValues(formData);
   const revision = _prevState.revision + 1;
@@ -145,7 +145,7 @@ export async function updateMeeting(
   _prevState: State,
   formData: FormData,
 ): Promise<State> {
-  await requireAdmin();
+  await requireMeetingManager();
 
   const values = getSubmittedValues(formData);
   const revision = _prevState.revision + 1;
@@ -201,7 +201,7 @@ export async function updateMeeting(
 
 // DELETE
 export async function deleteMeeting(id: number, _formData: FormData) {
-  await requireAdmin();
+  await requireMeetingManager();
 
   void _formData;
 

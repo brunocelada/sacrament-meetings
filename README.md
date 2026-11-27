@@ -1,5 +1,9 @@
 [Vercel Site](https://sacrament-meetings-orcin-beta.vercel.app/)
 
+Project Tester:
+email: tester@example.com
+Password: ProjectTester123
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

@@ -2,15 +2,16 @@ import "server-only";
 
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { canManageMeetings } from "@/lib/permissions";
 
-export async function requireAdmin() {
+export async function requireMeetingManager() {
   const session = await auth();
 
   if (!session?.user) {
     redirect("/login");
   }
 
-  if (session.user.role !== "admin") {
+  if (!canManageMeetings(session.user.role)) {
     redirect("/meetings");
   }
 

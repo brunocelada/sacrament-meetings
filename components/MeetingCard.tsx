@@ -4,7 +4,7 @@ import DeleteMeetingForm from "@/components/DeleteMeetingForm";
 
 interface MeetingCardProps {
   meeting: SacramentMeeting;
-  isAdmin: boolean;
+  canManageMeetings: boolean;
 }
 
 const meetingTypeLabels: Record<SacramentMeeting["meetingType"], string> = {
@@ -14,7 +14,10 @@ const meetingTypeLabels: Record<SacramentMeeting["meetingType"], string> = {
   general: "General Meeting",
 };
 
-export default function MeetingCard({ meeting, isAdmin }: MeetingCardProps) {
+export default function MeetingCard({
+  meeting,
+  canManageMeetings,
+}: MeetingCardProps) {
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     dateStyle: "long",
     timeZone: "UTC",
@@ -84,7 +87,7 @@ export default function MeetingCard({ meeting, isAdmin }: MeetingCardProps) {
           View Meeting Details
         </Link>
 
-        {isAdmin && (
+        {canManageMeetings && (
           <>
             {/* Edit button */}
             <Link

@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { canManageMeetings } from "@/lib/permissions";
 
 export default async function AdminLayout({
   children,
@@ -12,7 +13,7 @@ export default async function AdminLayout({
     redirect("/login");
   }
 
-  if (session.user.role !== "admin") {
+  if (!canManageMeetings(session.user.role)) {
     redirect("/meetings");
   }
 

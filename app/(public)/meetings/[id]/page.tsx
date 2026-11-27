@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { auth } from "@/auth";
 import type { Metadata, ResolvingMetadata } from "next";
 import { cache } from "react";
+import { canManageMeetings } from "@/lib/permissions";
 
 export const instant = false;
 
@@ -74,11 +75,11 @@ export default async function MeetingPage({ params }: MeetingPageProps) {
   }
 
   const session = await auth();
-  const isAdmin = session?.user?.role === "admin";
+  const canManage = canManageMeetings(session?.user?.role);
 
   return (
     <main className="px-4 py-2">
-      <MeetingDetail meeting={meeting} isAdmin={isAdmin} />
+      <MeetingDetail meeting={meeting} canManageMeetings={canManage} />
     </main>
   );
 }

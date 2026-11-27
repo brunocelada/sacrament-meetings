@@ -1,6 +1,5 @@
 import { sql } from "@/lib/db/client";
-
-export type UserRole = "admin" | "user";
+import type { UserRole } from "@/lib/permissions";
 
 export interface AuthUser {
   id: string;
@@ -31,7 +30,7 @@ export async function getUserByEmail(email: string): Promise<AuthUser | null> {
     return null;
   }
 
-  if (user.role !== "admin" && user.role !== "user") {
+  if (user.role !== "admin" && user.role !== "tester" && user.role !== "user") {
     throw new Error("Invalid user role.");
   }
 

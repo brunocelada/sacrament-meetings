@@ -3,13 +3,14 @@ import { connection } from "next/server";
 import { auth } from "@/auth";
 import SignOutButton from "@/components/auth/SignOutButton";
 import Link from "next/link";
+import { canManageMeetings as canManageMeetingsRole } from "@/lib/permissions";
 
 export default async function Header() {
   await connection();
   const today = new Date().toDateString();
 
   const session = await auth();
-  const isAdmin = session?.user?.role === "admin";
+  const canManage = canManageMeetingsRole(session?.user?.role);
 
   return (
     <header className="text-center py-2">
@@ -22,7 +23,11 @@ export default async function Header() {
               </p>
 
               <p className="text-xs font-medium uppercase tracking-wide text-secondary">
-                {isAdmin ? "Administrator · Admin" : "Member · User"}
+                {session.user.role === "admin"
+                  ? "Admin"
+                  : session.user.role === "tester"
+                    ? "Tester"
+                    : "User"}
               </p>
             </div>
 
@@ -47,7 +52,7 @@ export default async function Header() {
         </p>
       </section>
       <div className="mt-4">
-        <NavLinks isAdmin={isAdmin} />
+        <NavLinks canManageMeetings={canManage} />
       </div>
     </header>
   );

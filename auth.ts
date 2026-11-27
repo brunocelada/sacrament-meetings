@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { z } from "zod";
+import { canManageMeetings } from "@/lib/permissions";
 
 import authConfig from "./auth.config";
 import { getUserByEmail } from "@/lib/users-db";
@@ -61,7 +62,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
   callbacks: {
     authorized({ auth }) {
-      return auth?.user?.role === "admin";
+      return canManageMeetings(auth?.user?.role);
     },
 
     async jwt({ token, user }) {
@@ -76,7 +77,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (session.user && token.sub) {
         session.user.id = token.sub;
 
-        if (token.role === "admin" || token.role === "user") {
+        if (
+          token.role === "admin" ||
+          token.role === "tester" ||
+          token.role === "user"
+        ) {
           session.user.role = token.role;
         }
       }

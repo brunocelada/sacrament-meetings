@@ -1,20 +1,21 @@
 import type { DefaultSession } from "next-auth";
+import type { UserRole } from "@/lib/permissions";
 
 declare module "next-auth" {
   interface Session {
     user: {
       id: string;
-      role: "admin" | "user";
+      role: UserRole;
     } & NonNullable<DefaultSession["user"]>;
   }
 
   interface User {
-    role: "admin" | "user";
+    role: UserRole;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    role?: "admin" | "user";
+    role?: UserRole;
   }
 }

@@ -4,12 +4,12 @@ import Link from "next/link";
 
 interface MeetingDetailProps {
   meeting: SacramentMeeting;
-  isAdmin: boolean;
+  canManageMeetings: boolean;
 }
 
 export default function MeetingDetail({
   meeting,
-  isAdmin,
+  canManageMeetings,
 }: MeetingDetailProps) {
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     dateStyle: "full",
@@ -29,7 +29,7 @@ export default function MeetingDetail({
         </Link>
 
         {/* Edit action */}
-        {isAdmin && (
+        {canManageMeetings && (
           <Link
             href={`/meetings/${meeting.id}/edit`}
             className="rounded-md border border-secondary px-4 py-2 text-sm
@@ -219,7 +219,7 @@ export default function MeetingDetail({
       </section>
 
       {/* Delete action */}
-      {isAdmin && <DeleteMeetingForm meetingId={meeting.id} />}
+      {canManageMeetings && <DeleteMeetingForm meetingId={meeting.id} />}
     </article>
   );
 }

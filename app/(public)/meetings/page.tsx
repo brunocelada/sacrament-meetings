@@ -4,6 +4,7 @@ import { Pagination } from "@/components/Pagination";
 import { getMeetings, getMeetingsTotalPages } from "@/lib/meetings-db";
 import { auth } from "@/auth";
 import type { Metadata } from "next";
+import { canManageMeetings } from "@/lib/permissions";
 
 export const instant = false;
 
@@ -39,7 +40,7 @@ export default async function MeetingsPage({
   const meetings = await getMeetings(query, currentPage);
 
   const session = await auth();
-  const isAdmin = session?.user?.role === "admin";
+  const canManage = canManageMeetings(session?.user?.role);
 
   return (
     <main className="items-center flex flex-col mx-auto max-w-5xl px-4 py-2">
@@ -51,7 +52,11 @@ export default async function MeetingsPage({
 
         <div className="mt-6">
           {meetings.map((meeting) => (
-            <MeetingCard key={meeting.id} meeting={meeting} isAdmin={isAdmin} />
+            <MeetingCard
+              key={meeting.id}
+              meeting={meeting}
+              canManageMeetings={canManage}
+            />
           ))}
         </div>
 
