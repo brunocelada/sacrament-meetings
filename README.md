@@ -5,7 +5,7 @@
   <br />
   A web application for planning, managing, and reviewing sacrament meeting agendas for Parque Urquiza Ward.
   <br /><br />
-  <a href="https://sacrament-meetings-fz9v3xwrz-brunocelada.vercel.app/">Open the live application</a>
+  <a href="https://sacrament-meetings-orcin-beta.vercel.app/">Open the live application</a>
   ·
   <a href="https://github.com/brunocelada/sacrament-meetings">View the source code</a>
 </p>
@@ -32,7 +32,7 @@ Each meeting brings its key information together in one place: meeting leadershi
 
 ## Live application
 
-**[Open Sacrament Meetings – Parque Urquiza Ward](https://sacrament-meetings-fz9v3xwrz-brunocelada.vercel.app/)**
+**[Open Sacrament Meetings – Parque Urquiza Ward](https://sacrament-meetings-orcin-beta.vercel.app/)**
 
 The application is deployed on Vercel and uses a Neon PostgreSQL database.
 
@@ -99,12 +99,12 @@ The application also exposes read-only meeting endpoints:
 
 Use the following account to explore the meeting-management features in the live application:
 
-| Field        | Value                                                                           |
-| ------------ | ------------------------------------------------------------------------------- |
-| Sign-in page | [Open login](https://sacrament-meetings-fz9v3xwrz-brunocelada.vercel.app/login) |
-| Email        | `tester@example.com`                                                            |
-| Password     | `ProjectTester123`                                                              |
-| Role         | `tester`                                                                        |
+| Field        | Value                                                                |
+| ------------ | -------------------------------------------------------------------- |
+| Sign-in page | [Open login](https://sacrament-meetings-orcin-beta.vercel.app/login) |
+| Email        | `tester@example.com`                                                 |
+| Password     | `ProjectTester123`                                                   |
+| Role         | `tester`                                                             |
 
 > [!WARNING]
 > This is a **public demo account** with permission to create, edit, and delete meeting records in the shared application. Anyone with these credentials can change or remove shared demo data. Do not enter confidential, personal, or sensitive information, and do not reuse this password for any other account.
