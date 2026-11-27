@@ -4,6 +4,7 @@ import DeleteMeetingForm from "@/components/DeleteMeetingForm";
 
 interface MeetingCardProps {
   meeting: SacramentMeeting;
+  isAdmin: boolean;
 }
 
 const meetingTypeLabels: Record<SacramentMeeting["meetingType"], string> = {
@@ -13,7 +14,7 @@ const meetingTypeLabels: Record<SacramentMeeting["meetingType"], string> = {
   general: "General Meeting",
 };
 
-export default function MeetingCard({ meeting }: MeetingCardProps) {
+export default function MeetingCard({ meeting, isAdmin }: MeetingCardProps) {
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     dateStyle: "long",
     timeZone: "UTC",
@@ -82,16 +83,23 @@ export default function MeetingCard({ meeting }: MeetingCardProps) {
         >
           View Meeting Details
         </Link>
-        <Link
-          href={`/meetings/${meeting.id}/edit`}
-          className="mt-5 inline-block rounded-md bg-secondary px-4 py-2 text-sm 
+
+        {isAdmin && (
+          <>
+            {/* Edit button */}
+            <Link
+              href={`/meetings/${meeting.id}/edit`}
+              className="mt-5 inline-block rounded-md bg-secondary px-4 py-2 text-sm 
         font-medium text-white transition-colors hover:bg-primary focus-visible:outline-2 
         focus-visible:outline-offset-2 focus-visible:outline-blue-700"
-        >
-          Edit
-        </Link>
+            >
+              Edit
+            </Link>
 
-        <DeleteMeetingForm meetingId={meeting.id} />
+            {/* Delete button */}
+            <DeleteMeetingForm meetingId={meeting.id} />
+          </>
+        )}
       </div>
     </article>
   );

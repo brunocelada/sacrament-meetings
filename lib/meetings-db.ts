@@ -1,8 +1,6 @@
 import type { SacramentMeeting } from "./types";
-import { neon } from "@neondatabase/serverless";
+import { sql } from "./db/client";
 import { SacramentMeetingSchema, SacramentMeetingsSchema } from "./validations";
-
-const sql = neon(process.env.DATABASE_URL!);
 
 const ITEMS_PER_PAGE = 5;
 

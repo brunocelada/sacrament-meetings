@@ -2,6 +2,7 @@ import MeetingCard from "@/components/MeetingCard";
 import { MeetingSearch } from "@/components/MeetingSearch";
 import { Pagination } from "@/components/Pagination";
 import { getMeetings, getMeetingsTotalPages } from "@/lib/meetings-db";
+import { auth } from "@/auth";
 
 export const instant = false;
 
@@ -26,10 +27,12 @@ export default async function MeetingsPage({
       : 1;
 
   const totalPages = await getMeetingsTotalPages(query);
-
   const currentPage = totalPages > 0 ? Math.min(validPage, totalPages) : 1;
 
   const meetings = await getMeetings(query, currentPage);
+
+  const session = await auth();
+  const isAdmin = session?.user?.role === "admin";
 
   return (
     <main className="items-center flex flex-col mx-auto max-w-5xl px-4 py-2">
@@ -41,7 +44,7 @@ export default async function MeetingsPage({
 
         <div className="mt-6">
           {meetings.map((meeting) => (
-            <MeetingCard key={meeting.id} meeting={meeting} />
+            <MeetingCard key={meeting.id} meeting={meeting} isAdmin={isAdmin} />
           ))}
         </div>
 

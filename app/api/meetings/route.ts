@@ -1,4 +1,3 @@
-// GET /api/meetings (POST is optional stretch)
 import { getAllMeetings } from "@/lib/meetings-db";
 import { NextResponse } from "next/server";
 

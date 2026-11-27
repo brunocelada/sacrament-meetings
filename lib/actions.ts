@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { requireAdmin } from "@/lib/auth-utils";
 
 import {
   addMeeting,
@@ -95,6 +96,8 @@ export async function createMeeting(
   _prevState: State,
   formData: FormData,
 ): Promise<State> {
+  await requireAdmin();
+
   const values = getSubmittedValues(formData);
   const revision = _prevState.revision + 1;
 
@@ -111,7 +114,7 @@ export async function createMeeting(
 
   try {
     await addMeeting(result.data);
-    } catch (error) {
+  } catch (error) {
     if (isUniqueConstraintViolation(error)) {
       return {
         message:
@@ -142,6 +145,8 @@ export async function updateMeeting(
   _prevState: State,
   formData: FormData,
 ): Promise<State> {
+  await requireAdmin();
+
   const values = getSubmittedValues(formData);
   const revision = _prevState.revision + 1;
 
@@ -196,6 +201,8 @@ export async function updateMeeting(
 
 // DELETE
 export async function deleteMeeting(id: number, _formData: FormData) {
+  await requireAdmin();
+
   void _formData;
 
   if (!Number.isSafeInteger(id) || id <= 0) {

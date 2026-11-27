@@ -1,6 +1,8 @@
 import MeetingsForm from "@/components/MeetingsForm";
 import { createMeeting } from "@/lib/actions";
 
+export const instant = false;
+
 export default function NewMeetingPage() {
   return (
     <main className="mx-auto max-w-5xl px-4 py-6">

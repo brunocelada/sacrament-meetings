@@ -10,36 +10,38 @@ const links = [
   { href: "/meetings/new", label: "New Meeting" },
 ];
 
-export default function NavLinks() {
+export default function NavLinks({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
 
   return (
     <nav>
-      <ul className="flex justify-center gap-6 text-md sm:text-xl font-medium text-tertiary">
-        {links.map((link) => {
-          const isActive =
-            pathname === link.href ||
-            (link.href === "/meetings" &&
-              pathname.startsWith("/meetings/") &&
-              !pathname.startsWith("/meetings/current") &&
-              pathname !== "/meetings/new");
+      <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm sm:text-base font-medium text-tertiary">
+        {links
+          .filter((link) => link.href !== "/meetings/new" || isAdmin)
+          .map((link) => {
+            const isActive =
+              pathname === link.href ||
+              (link.href === "/meetings" &&
+                pathname.startsWith("/meetings/") &&
+                !pathname.startsWith("/meetings/current") &&
+                pathname !== "/meetings/new");
 
-          return (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={`transition-colors hover:text-primary hover:decoration-primary ${
-                  isActive
-                    ? "underline decoration-tertiary underline-offset-4 decoration-3"
-                    : "text-tertiary"
-                }`}
-                aria-current={isActive ? "page" : undefined}
-              >
-                {link.label}
-              </Link>
-            </li>
-          );
-        })}
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`transition-colors hover:text-primary hover:decoration-primary ${
+                    isActive
+                      ? "underline decoration-tertiary underline-offset-4 decoration-3"
+                      : "text-tertiary"
+                  }`}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
       </ul>
     </nav>
   );
