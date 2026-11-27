@@ -16,9 +16,29 @@ const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
 });
 
+const siteUrl = process.env.SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "Sacrament Meetings",
-  description: "Plan and review meeting agendas",
+  metadataBase: new URL(siteUrl),
+
+  title: {
+    default: "Sacrament Meetings | Parque Urquiza Ward",
+    template: "%s | Sacrament Meetings",
+  },
+
+  description:
+    "Plan and manage sacrament meeting schedules, agendas, hymns, speakers, and ward business for Parque Urquiza Ward.",
+
+  applicationName: "Sacrament Meetings",
+
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Sacrament Meetings",
+    title: "Sacrament Meetings | Parque Urquiza Ward",
+    description:
+      "Plan and manage sacrament meeting schedules, agendas, hymns, speakers, and ward business for Parque Urquiza Ward.",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

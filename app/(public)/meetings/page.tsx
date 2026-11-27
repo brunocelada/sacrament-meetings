@@ -3,8 +3,15 @@ import { MeetingSearch } from "@/components/MeetingSearch";
 import { Pagination } from "@/components/Pagination";
 import { getMeetings, getMeetingsTotalPages } from "@/lib/meetings-db";
 import { auth } from "@/auth";
+import type { Metadata } from "next";
 
 export const instant = false;
+
+export const metadata: Metadata = {
+  title: "Meetings",
+  description:
+    "Browse sacrament meeting agendas for Parque Urquiza Ward, including schedules, hymns, prayers, speakers, and ward business.",
+};
 
 interface MeetingsPageProps {
   searchParams: Promise<{
